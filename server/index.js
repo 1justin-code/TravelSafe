@@ -8,9 +8,9 @@ app.use(express.json());
 
 // connect to local database
 const db = mysql.createConnection({
-  user: "root",
-  host: "127.0.0.1",
-  password: "password",
+  user: "admin",
+  host: "database-2.cbz6gnja77aw.us-east-2.rds.amazonaws.com",
+  password: "Cs348proj135!",
   database: "covidtravel_db",
   multipleStatements: true,
 });
