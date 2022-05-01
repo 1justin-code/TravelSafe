@@ -56,9 +56,6 @@ export default function Header() {
           <h1 className={classes.appbarTitle}>
             Travel<span className={classes.colorText}>Safe.</span>
           </h1>
-          <IconButton>
-            <SortIcon className={classes.icon} />
-          </IconButton>
         </Toolbar>
       </AppBar>
 

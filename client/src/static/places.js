@@ -4,7 +4,7 @@ const places = [
     title: "Explore Countries",
     description:
       "Click here to plan your trips, and access information regarding Travel Covid Requirements and Restrictions",
-    imageUrl: process.env.PUBLIC_URL + "/assets/profile.jpg",
+    imageUrl: process.env.PUBLIC_URL + "/assets/bg5.jpg",
     time: 1500,
   },
   {
@@ -12,7 +12,7 @@ const places = [
     title: "Explore Airlines",
     description:
       "Click here to plan your trips, and access information regarding Travel Covid Requirements and Restrictions",
-    imageUrl: process.env.PUBLIC_URL + "/assets/island1.jpg",
+    imageUrl: process.env.PUBLIC_URL + "/assets/island2.jpg",
     time: 1500,
   },
   {

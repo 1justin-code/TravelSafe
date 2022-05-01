@@ -59,3 +59,29 @@
 .users h3 {
   margin: 20px;
 }
+
+.airplanes {
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  margin: 10px;
+  display: flex;
+  padding: 10px;
+}
+
+.airplanes h3 {
+  margin: 20px;
+}
+
+.countries {
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  margin: 10px;
+  display: flex;
+  padding: 10px;
+}
+
+.countries h3 {
+  margin: 20px;
+}
