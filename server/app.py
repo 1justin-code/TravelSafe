@@ -3,7 +3,7 @@ from flask import Flask, send_from_directory
 from flask_cors import CORS #comment this on deployment
 from flask import request, jsonify
 
-from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, func
+from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, Boolean, func
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
@@ -27,6 +27,14 @@ class users(Base):
     VaccineStatus = Column(String, nullable=False)
     VaccineType = Column(String, nullable=False)
     passport = Column(String, nullable=False)
+
+class countries(Base):
+    __tablename__= "countries"
+    country_name = Column(String, primary_key = True, nullable = False)
+    vaccines_required = Column(Boolean, nullable = True)
+    testing_required = Column(Boolean, nullable = True)
+    risk_level = Column(Integer, nullable = True)
+    quarantine_required = Column(Boolean, nullable = True)
 
 Base.metadata.create_all(engine)
 
@@ -56,3 +64,59 @@ def create_account():
 
     print('hello friend')
     return jsonify('hello')
+
+@app.route("/get_users", methods=["GET"])
+def get_users():
+    with engine.connect() as con:
+        rs = con.execute('call covidtravel_db.get_users();')
+        user_arr = []
+
+        for row in rs:
+            user_arr.append(row)
+
+    return user_arr
+
+@app.route("/insert_country", methods=["POST"])
+def insert_country():
+    '''country_name = request.headers.get("country_name")
+    vaccines_required = request.headers.get("vaccines_required")
+    testing_required = request.headers.get("testing_required")
+    risk_level = request.headers.get('risk_level')
+    quarantine_required = request.headers.get('quarantine_required')'''
+
+    country_name = 'america'
+    vaccines_required = False
+    testing_required = False
+    risk_level = '1'
+    quarantine_required = False
+
+    s = Session()
+
+    data = {"country_name":[country_name], "vaccines_required":[vaccines_required], "testing_required":[testing_required], "risk_level":[risk_level], "quarantine_required":[quarantine_required]}
+
+    df = pd.DataFrame(data)
+
+    s.bulk_insert_mappings(countries, df.to_dict(orient="records"))
+
+    s.commit()
+    s.close()
+
+    return 'success'
+
+@app.route("/get_all_countries", methods=["GET"])
+def get_all_countries():
+    with engine.connect() as con:
+        rs = con.execute('call covidtravel_db.get_countries();')
+        user_arr = []
+
+        for row in rs:
+            user_arr.append(row)
+
+    return user_arr
+
+
+
+
+
+
+
