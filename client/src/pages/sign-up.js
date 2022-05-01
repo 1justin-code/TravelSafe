@@ -35,6 +35,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
 
   const options = useMemo(() => countryList().getData(), []);
+  const API_URL = "http://127.0.0.1:5000";
 
   const changeHandler = (value) => {
     setValue(value);
@@ -43,15 +44,21 @@ export default function SignUp() {
 
   // sends a request to the server to add the user with information submitted.
   const addUser = () => {
-    Axios.post("http://localhost:3001/create", {
-      email: email,
-      password: password,
-      name: name,
-      lastName: lastName,
-      VaccineStatus: VaccineStatus,
-      VaccineType: VaccineType,
-      passport: passport,
-    }).then(() => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        email: email,
+        password: password,
+        name: name,
+        lastName: lastName,
+        VaccineStatus: VaccineStatus,
+        VaccineType: VaccineType,
+        passport: passport
+      }
+    };
+    fetch(API_URL + "/sign_up", requestOptions
+    ).then(() => {
       setUsersList([
         ...usersList,
         {

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +13,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "mysql": "^2.18.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "sequelize": "^6.19.0",
+    "sqlite3": "^5.0.6"
   }
 }
