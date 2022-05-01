@@ -1,3 +1,6 @@
+import { Sequelize, Model, DataTypes } from 'sequelize';
+
+
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
@@ -5,6 +8,18 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+
+const sequelize = new Sequelize('sqlite::memory:');
+const User = sequelize.define('users', {
+  user_id: DataTypes.INTEGER,
+  name: DataTypes.STRING,
+  lastName: DataTypes.STRING,
+  email: DataTypes.STRING,
+  password: DataTypes.STRING,
+  passport: DataTypes.STRING,
+  vaccine_status: DataTypes.STRING,
+  vaccine_type: DataTypes.STRING
+});
 
 // connect to local database
 const db = mysql.createConnection({
@@ -37,6 +52,11 @@ app.post("/create", (req, res) => {
     }
   );
 });
+
+async function run() {
+  const users = await User.findAll();
+}
+
 
 // select all users in the database.
 app.get("/users", (req, res) => {
