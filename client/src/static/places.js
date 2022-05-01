@@ -1,6 +1,15 @@
 const places = [
   {
-    title: "Plan A Trip",
+    placeNav: "/ExploreCountries",
+    title: "Explore Countries",
+    description:
+      "Click here to plan your trips, and access information regarding Travel Covid Requirements and Restrictions",
+    imageUrl: process.env.PUBLIC_URL + "/assets/profile.jpg",
+    time: 1500,
+  },
+  {
+    placeNav: "/ExploreAirlines",
+    title: "Explore Airlines",
     description:
       "Click here to plan your trips, and access information regarding Travel Covid Requirements and Restrictions",
     imageUrl: process.env.PUBLIC_URL + "/assets/island1.jpg",
