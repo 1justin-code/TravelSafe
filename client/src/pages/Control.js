@@ -18,7 +18,7 @@ const Button = styled.button`
 function Control() {
   const [usersList, setUsersList] = useState([]);
   const [countries, setCountriesList] = useState([]);
-  const [airlines, setAirlines] = useState([]);
+  const [airlines, setAirlinesList] = useState([]);
   //gets all users from the database and sets them to the local usersList
   const getUsers = () => {
     Axios.get("http://localhost:3001/users").then((response) => {
@@ -47,8 +47,8 @@ function Control() {
   };
 
   const getAirlines = () => {
-    Axios.get("http://localhost:3001/countries").then((response) => {
-      setCountriesList(response.data);
+    Axios.get("http://localhost:3001/airlines").then((response) => {
+      setAirlinesList(response.data);
     });
   };
 
@@ -69,7 +69,7 @@ function Control() {
               <h3> Name: {val.name} </h3>
               <h3> Email: {val.email} </h3>
               <h3> Password: {val.password} </h3>
-              <h3> VaccineStatus: {val.vaccine_status} </h3>
+              <h3> Vaccine Status: {val.vaccine_status} </h3>
               <h3> Passport Country: {val.passport} </h3>
             </div>
           );
@@ -91,10 +91,10 @@ function Control() {
         {airlines.map((val, _key) => {
           return (
             <div className='airlines'>
-              <h3> airline id: {val.airline_id} </h3>
-              <h3> airline name: {val.airline_name} </h3>
-              <h3> mask required: {val.mask_required} </h3>
-              <h3> vaccine required: {val.vaccine_required} </h3>
+              <h3> Airline Id: {val.airline_id} </h3>
+              <h3> Airline Name: {val.airline_name} </h3>
+              <h3> Mask Required: {val.mask_required} </h3>
+              <h3> Vaccine Required: {val.vaccine_required} </h3>
             </div>
           );
         })}

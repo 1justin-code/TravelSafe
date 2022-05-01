@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ff7f50",
   },
   container: {
-    textAlign: "left",
+    textAlign: "center",
   },
   title: {
     color: "#fff",
@@ -67,17 +67,6 @@ export default function Header() {
         {...(checked ? { timeout: 1000 } : {})}
         collapsedHeight={50}
       >
-        <div className={classes.container}>
-          <h1 className={classes.title}>
-            Welcome to <br />
-            Travel<span className={classes.colorText}>Safe.</span>
-          </h1>
-          <Scroll to='place-to-visit' smooth={true}>
-            <IconButton>
-              <ExpandMoreIcon className={classes.goDown} />
-            </IconButton>
-          </Scroll>
-        </div>
       </Collapse>
     </div>
   );

@@ -7,6 +7,9 @@ import Landing from "./pages/Landing";
 import SignInSide from "./pages/sign-in";
 import SignUp from "./pages/sign-up";
 import Control from "./pages/Control";
+import ExploreCountries from "./pages/ExploreCountries";
+import ExploreAirlines from "./pages/ExploreAirlines";
+
 
 function App() {
   return (
@@ -18,7 +21,9 @@ function App() {
         <Route path='/sign-in' element={<SignInSide />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/Control' element={<Control />} />
-        <Route path='*' element={<Error />} />
+        <Route path='/ExploreCountries' element={<ExploreCountries />} />
+        <Route path='/ExploreAirlines' element={<ExploreAirlines />} />
+	<Route path='*' element={<Error />} />
       </Routes>
     </Router>
   );
