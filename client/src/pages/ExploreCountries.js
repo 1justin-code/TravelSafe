@@ -38,7 +38,7 @@ function ExploreCountries() {
   const [airlines, setAirlines] = useState([]);
   const classes = useStyles();
   const getCountries = () => {
-    Axios.get("http://localhost:3001/countries").then((response) => {
+    Axios.get("http://127.0.0.1/countries").then((response) => {
       setCountriesList(response.data);
     });
   };

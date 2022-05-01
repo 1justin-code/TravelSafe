@@ -21,40 +21,40 @@ function Control() {
   const [airlines, setAirlinesList] = useState([]);
   //gets all users from the database and sets them to the local usersList
   const getUsers = () => {
-    Axios.get("http://localhost:3001/users").then((response) => {
+    Axios.get("http://127.0.0.1:5000/users").then((response) => {
       setUsersList(response.data);
     });
   };
 
   //remove all users from the database and resets the local usersList
   const clearUsers = () => {
-    Axios.get("http://localhost:3001/clear-users").then((response) => {
+    Axios.get("http://127.0.0.1:5000/clear-users").then((response) => {
       setUsersList([]);
     });
   };
 
   const getCountries = () => {
-    Axios.get("http://localhost:3001/countries").then((response) => {
+    Axios.get("http://127.0.0.1:5000/countries").then((response) => {
       setCountriesList(response.data);
     });
   };
 
   //remove all users from the database and resets the local usersList
   const clearCountries = () => {
-    Axios.get("http://localhost:3001/clear-countries").then((response) => {
+    Axios.get("http://127.0.0.1:5000/clear-countries").then((response) => {
       setCountriesList([]);
     });
   };
 
   const getAirlines = () => {
-    Axios.get("http://localhost:3001/airlines").then((response) => {
+    Axios.get("http://127.0.0.1:5000/airlines").then((response) => {
       setAirlinesList(response.data);
     });
   };
 
   //remove all users from the database and resets the local usersList
   const clearAirlines = () => {
-    Axios.get("http://localhost:3001/clear-airlines").then((response) => {
+    Axios.get("http://127.0.0.1:5000/clear-airlines").then((response) => {
       setAirlinesList([]);
     });
   };
@@ -99,8 +99,8 @@ function Control() {
           );
         })}
         <Button onClick={clearUsers}> CLEAR USERS IN DB </Button>
-	<Button onClick={clearCountries}> CLEAR USERS IN DB </Button>
-	<Button onClick={clearAirlines}> CLEAR USERS IN DB </Button>
+	<Button onClick={clearCountries}> CLEAR COUNTRIES IN DB </Button>
+	<Button onClick={clearAirlines}> CLEAR AIRLINES IN DB </Button>
       </div>
     </div>
   );

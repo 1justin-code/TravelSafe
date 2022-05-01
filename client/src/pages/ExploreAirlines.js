@@ -39,7 +39,7 @@ function exploreAirlines() {
 
 
   const getAirlines = () => {
-    Axios.get("http://localhost:3001/airlines").then((response) => {
+    Axios.get("http://127.0.0.1:5000/airlines").then((response) => {
       setAirlinesList(response.data);
     });
   };
