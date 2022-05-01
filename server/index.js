@@ -52,7 +52,7 @@ app.get("/users", (req, res) => {
 // delete all users in the database and reset the increment counter.
 app.get("/clear-users", (req, res) => {
   db.query(
-    "TRUNCATE TABLE covidtravel_db.users; ALTER TABLE covidtravel_db.users AUTO_INCREMENT = 0; DELETE FROM covidtravel_db.users",
+    "SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE covidtravel_db.users; ALTER TABLE covidtravel_db.users AUTO_INCREMENT = 0; DELETE FROM covidtravel_db.users; SET FOREIGN_KEY_CHECKS = 1",
     (err, result) => {
       if (err) {
         console.log(err);
