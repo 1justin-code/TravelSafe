@@ -17,7 +17,8 @@ const Button = styled.button`
 
 function Control() {
   const [usersList, setUsersList] = useState([]);
-
+  const [countries, setCountriesList] = useState([]);
+  const [airlines, setAirlines] = useState([]);
   //gets all users from the database and sets them to the local usersList
   const getUsers = () => {
     Axios.get("http://localhost:3001/users").then((response) => {
@@ -29,6 +30,32 @@ function Control() {
   const clearUsers = () => {
     Axios.get("http://localhost:3001/clear-users").then((response) => {
       setUsersList([]);
+    });
+  };
+
+  const getCountries = () => {
+    Axios.get("http://localhost:3001/countries").then((response) => {
+      setCountriesList(response.data);
+    });
+  };
+
+  //remove all users from the database and resets the local usersList
+  const clearCountries = () => {
+    Axios.get("http://localhost:3001/clear-countries").then((response) => {
+      setCountriesList([]);
+    });
+  };
+
+  const getAirlines = () => {
+    Axios.get("http://localhost:3001/countries").then((response) => {
+      setCountriesList(response.data);
+    });
+  };
+
+  //remove all users from the database and resets the local usersList
+  const clearAirlines = () => {
+    Axios.get("http://localhost:3001/clear-airlines").then((response) => {
+      setAirlinesList([]);
     });
   };
 
@@ -47,7 +74,33 @@ function Control() {
             </div>
           );
         })}
+	<Button onClick={getCountries}> SHOW ALL COUNTRIES IN DB </Button>
+        {countries.map((val, _key) => {
+          return (
+            <div className='countries'>
+              <h3> Country Name: {val.country_name} </h3>
+              <h3> Vaccine Required: {val.vaccine_required} </h3>
+              <h3> Testing Required: {val.testing_required} </h3>
+              <h3> Risk Level: {val.risk_level} </h3>
+              <h3> Quarantine Required: {val.quarantine_required} </h3>
+            </div>
+          );
+        })}
+
+	<Button onClick={getAirlines}> SHOW ALL AIRLINES IN DB </Button>
+        {airlines.map((val, _key) => {
+          return (
+            <div className='airlines'>
+              <h3> airline id: {val.airline_id} </h3>
+              <h3> airline name: {val.airline_name} </h3>
+              <h3> mask required: {val.mask_required} </h3>
+              <h3> vaccine required: {val.vaccine_required} </h3>
+            </div>
+          );
+        })}
         <Button onClick={clearUsers}> CLEAR USERS IN DB </Button>
+	<Button onClick={clearCountries}> CLEAR USERS IN DB </Button>
+	<Button onClick={clearAirlines}> CLEAR USERS IN DB </Button>
       </div>
     </div>
   );
