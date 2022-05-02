@@ -46,19 +46,12 @@ function Control() {
   const clearUsers = () => {
     {
       const requestOptions = {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
-          email: email,
-          password: password,
-          name: name,
-          lastName: lastName,
-          VaccineStatus: VaccineStatus,
-          VaccineType: VaccineType,
-          passport: passport
         }
       };
-      fetch(API_URL + "/get_users", requestOptions
+      fetch(API_URL + "/clear_users", requestOptions
       ).then(() => {
         setUsersList([]);
         console.log("success");
@@ -67,29 +60,71 @@ function Control() {
   };
 
   const getCountries = () => {
-    Axios.get("http://127.0.0.1:5000/countries").then((response) => {
-      setCountriesList(response.data);
+    const requestOptions = {
+      method: "GET",
+    };
+    fetch(API_URL + "/get_all_countries", requestOptions
+    ).then(resp => {
+      if (resp.status == 200) {
+        return resp.json();
+      } else {
+        alert("error");
+    }}).then(data => {
+      console.log(data.result)
+      setCountriesList(data.result);
+      console.log("success");
     });
   };
 
   //remove all users from the database and resets the local usersList
   const clearCountries = () => {
-    Axios.get("http://127.0.0.1:5000/clear-countries").then((response) => {
-      setCountriesList([]);
-    });
+    {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      };
+      fetch(API_URL + "/clear_countries", requestOptions
+      ).then(() => {
+        setCountriesList([]);
+        console.log("success");
+      });
+    };
   };
 
   const getAirlines = () => {
-    Axios.get("http://127.0.0.1:5000/airlines").then((response) => {
-      setAirlinesList(response.data);
+    const requestOptions = {
+      method: "GET",
+    };
+    fetch(API_URL + "/get_all_airlines", requestOptions
+    ).then(resp => {
+      if (resp.status == 200) {
+        return resp.json();
+      } else {
+        alert("error");
+    }}).then(data => {
+      console.log(data.result)
+      setAirlinesList(data.result);
+      console.log("success");
     });
   };
 
   //remove all users from the database and resets the local usersList
   const clearAirlines = () => {
-    Axios.get("http://127.0.0.1:5000/clear-airlines").then((response) => {
-      setAirlinesList([]);
-    });
+    {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      };
+      fetch(API_URL + "/clear_airlines", requestOptions
+      ).then(() => {
+        setAirlinesList([]);
+        console.log("success");
+      });
+    };
   };
 
   const sendAirlines = () => {
