@@ -103,6 +103,14 @@ def get_users():
     list = get_all_table('users')
     return jsonify({'result': [dict(row) for row in list]})
 
+@app.route("/clear_users", methods=["POST"])
+def clear_users():
+    s = Session()
+    s.query(users).delete()
+    s.commit()
+    s.close()
+    return 'success'
+
 @app.route("/insert_country", methods=["POST"])
 def insert_country():
     country_name = request.headers.get("country_name")
@@ -128,6 +136,15 @@ def insert_country():
 def get_all_countries():
     list = get_all_table('countries')
     return jsonify({'result': [dict(row) for row in list]})
+
+@app.route('/clear_countries', methods=["POST"])
+def clear_countries():
+    s = Session()
+    s.query(countries).delete()
+    s.commit()
+    s.close()
+    return 'success'
+
 
 @app.route("/insert_airlines", methods=["POST"])
 def insert_airlines():
@@ -159,6 +176,14 @@ def get_all_airlines():
     list = get_all_table('airlines')
     return jsonify({'result': [dict(row) for row in list]})
 
+@app.route('/clear_airlines', methods=["POST"])
+def clear_airlines():
+    s = Session()
+    s.query(airlines).delete()
+    s.commit()
+    s.close()
+    return 'success'
+
 @app.route("/insert_vaccine", methods=["POST"])
 def insert_vaccine():
     '''vaccine_id = request.headers.get("vaccine_id")
@@ -182,6 +207,15 @@ def insert_vaccine():
 @app.route("/get_all_vaccines", methods=["GET"])
 def get_all_vaccines():
     return get_all_table('vaccines')
+
+@app.route('/clear_vaccines', methods=["POST"])
+def clear_vaccines():
+    s = Session()
+    s.query(vaccines).delete()
+    s.commit()
+    s.close()
+    return 'success'
+
 
 @app.route("/insert_trip", methods=["POST"])
 def insert_trip():
@@ -213,3 +247,12 @@ def insert_trip():
 @app.route("/get_all_trips", methods=["GET"])
 def get_all_trips():
     return get_all_table('trips')
+
+@app.route('/clear_trips', methods=["POST"])
+def clear_trips():
+    s = Session()
+    s.query(vaccines).delete()
+    s.commit()
+    s.close()
+    return 'success'
+
