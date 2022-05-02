@@ -40,13 +40,25 @@ function ExploreCountries() {
   const [testingStatus, setTesting] = useState("NO");
   const [quarantineStatus, setQuarantine] = useState("NO");
 
+  const API_URL = "http://127.0.0.1:5000";
+
   const classes = useStyles();
   const getCountries = () => {
-    Axios.get("http://127.0.0.1/countries").then((response) => {
-      setCountriesList(response.data);
+    const requestOptions = {
+      method: "GET",
+    };
+    fetch(API_URL + "/get_all_countries", requestOptions
+    ).then(resp => {
+      if (resp.status == 200) {
+        return resp.json();
+      } else {
+        alert("error");
+    }}).then(data => {
+      console.log(data.result)
+      setCountriesList(data.result);
+      console.log("success");
     });
   };
-
 
 
   return (

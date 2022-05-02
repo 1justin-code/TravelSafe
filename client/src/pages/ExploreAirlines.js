@@ -39,9 +39,22 @@ function exploreAirlines() {
   const [vaccineStatus, setVaccineStatus] = useState("NO");
   const [mask, setMask] = useState("NO");
 
+  const API_URL = "http://127.0.0.1:5000";
+
   const getAirlines = () => {
-    Axios.get("http://127.0.0.1:5000/airlines").then((response) => {
-      setAirlinesList(response.data);
+    const requestOptions = {
+      method: "GET",
+    };
+    fetch(API_URL + "/get_all_airlines", requestOptions
+    ).then(resp => {
+      if (resp.status == 200) {
+        return resp.json();
+      } else {
+        alert("error");
+    }}).then(data => {
+      console.log(data.result)
+      setAirlinesList(data.result);
+      console.log("success");
     });
   };
   

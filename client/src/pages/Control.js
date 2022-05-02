@@ -19,6 +19,8 @@ function Control() {
   const [usersList, setUsersList] = useState([]);
   const [countries, setCountriesList] = useState([]);
   const [airlines, setAirlinesList] = useState([]);
+
+  
   //gets all users from the database and sets them to the local usersList
   const getUsers = () => {
   { 

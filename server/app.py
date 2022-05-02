@@ -126,7 +126,8 @@ def insert_country():
 
 @app.route("/get_all_countries", methods=["GET"])
 def get_all_countries():
-    return get_all_table('countries')
+    list = get_all_table('countries')
+    return jsonify({'result': [dict(row) for row in list]})
 
 @app.route("/insert_airlines", methods=["POST"])
 def insert_airlines():
@@ -155,7 +156,8 @@ def insert_airlines():
 
 @app.route("/get_all_airlines", methods=["GET"])
 def get_all_airlines():
-    return get_all_table('airlines')
+    list = get_all_table('airlines')
+    return jsonify({'result': [dict(row) for row in list]})
 
 @app.route("/insert_vaccine", methods=["POST"])
 def insert_vaccine():
