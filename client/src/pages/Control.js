@@ -26,8 +26,13 @@ function Control() {
         method: "GET",
       };
       fetch(API_URL + "/get_users", requestOptions
-      ).then(() => {
-        setUsersList([]);
+      ).then(resp => {
+        if (resp.status == 200) {
+          return resp.json();
+        } else {
+          alert("error");
+      }}).then(data => {
+        setUsersList(data);
         console.log("success");
       });
     };
@@ -38,7 +43,7 @@ function Control() {
   const clearUsers = () => {
     {
       const requestOptions = {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           email: email,
@@ -50,7 +55,7 @@ function Control() {
           passport: passport
         }
       };
-      fetch(API_URL + "/users", requestOptions
+      fetch(API_URL + "/get_users", requestOptions
       ).then(() => {
         setUsersList([]);
         console.log("success");
