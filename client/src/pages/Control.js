@@ -92,6 +92,16 @@ function Control() {
     });
   };
 
+  const sendAirlines = () => {
+    //document.getElementById("country1").value
+};
+
+  const sendCountries = () => {
+};
+
+  const sendVaccines = () => {
+};
+
   return (
     <div className='App'>
       <div className='information'>
@@ -131,10 +141,55 @@ function Control() {
             </div>
           );
         })}
-        <Button onClick={clearUsers}> CLEAR USERS IN DB </Button>
+  <Button onClick={clearUsers}> CLEAR USERS IN DB </Button>
 	<Button onClick={clearCountries}> CLEAR COUNTRIES IN DB </Button>
 	<Button onClick={clearAirlines}> CLEAR AIRLINES IN DB </Button>
-      </div>
+  <div>
+    <form>
+  	  <div>
+    		  <label for="airlines1">   Airline Id: </label>
+      		<input id="airlines1" type="text" name="text" />
+		      <label for="airlines2">   Airline Name: </label>
+          <input id="airlines2" type="text" name="text"/>
+          <br></br>
+		      <label for="airlines3">   Mask Required: </label>
+          <input id="airlines3" type="text" name="text"/>
+		      <label for="airlines4">   Vaccine Required: </label>
+          <input id="airlines4" type="text" name="text"/>
+  	  </div>
+    </form>
+  	<Button onClick={sendAirlines}> SEND AIRLINE TO DB </Button>
+    </div>
+   	<div>
+    <form>
+           <div>
+                <label for="countries1">   Country Name: </label>
+                <input id="countries1" type="text" name="text"/>
+                <label for="countries2">   Vaccine Required: </label>
+                <input id="countries2" type="text" name="text"/>
+                <label for="countries3">   Testing Required: </label>
+                <input id="countries3" type="text" name="text"/>
+                <br></br>
+                <label for="countries4"> Risk Level: </label>
+                <input id="countries4" type="text" name="text"/>
+                <label for="countries5">   Quarantine Required: </label>
+                <input id="countries5" type="text" name="text"/>
+          </div>
+      </form>
+      <Button onClick={sendCountries}> SEND COUNTRY TO DB </Button> 
+    </div>    
+    <div>
+    <form>
+           <div>
+                <label for="vaccine1">   Vaccine ID: </label>
+                <input id="vaccine1" type="text" name="text"/>
+                <label for="vaccine2">   Vaccine Name: </label>
+                <input id="vaccine2" type="text" name="text"/>
+          </div>
+      </form>
+      <Button onClick={sendVaccines}> SEND VACCINES TO DB </Button> 
+    </div> 
+	</div>
     </div>
   );
 }
