@@ -100,12 +100,8 @@ def create_account():
 
 @app.route("/get_users", methods=["GET"])
 def get_users():
-<<<<<<< HEAD
-	return jsonify(get_all_table('users'))
-=======
     list = get_all_table('users')
     return jsonify({'result': [dict(row) for row in list]})
->>>>>>> 0c2c1ec6151da9b5998911b5ddee790c4b19b81a
 
 @app.route("/insert_country", methods=["POST"])
 def insert_country():
@@ -215,10 +211,3 @@ def insert_trip():
 @app.route("/get_all_trips", methods=["GET"])
 def get_all_trips():
     return get_all_table('trips')
-
-
-
-
-
-
-
