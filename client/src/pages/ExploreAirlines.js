@@ -36,22 +36,30 @@ function exploreAirlines() {
   const [usersList, setUsersList] = useState([]);
   const [countries, setCountriesList] = useState([]);
   const [airlines, setAirlinesList] = useState([]);
-
+  const [vaccineStatus, setVaccineStatus] = useState("NO");
+  const [mask, setMask] = useState("NO");
 
   const getAirlines = () => {
     Axios.get("http://127.0.0.1:5000/airlines").then((response) => {
       setAirlinesList(response.data);
     });
   };
-
+  
     const classes = useStyles();
 
   return (
     <div className='App'>
-	<div className={classes.root}>
+  <div className={classes.root}>
       		<CssBaseline />
-      		<Header />
-	<div className='information'>
+  	<label>
+    		<input type="checkbox" onChange={(event) => setVaccineStatus(event.target.value)}/>
+    		Vaccine?
+  	</label>
+    <label>
+    		<input type="checkbox" onChange={(event) => setMask(event.target.value)}/>
+    		Mask?
+  	</label>
+<div className='information'>
 	<Button onClick={getAirlines}> SEARCH AIRLINES </Button>
         {airlines.map((val, _key) => {
           return (
@@ -64,7 +72,8 @@ function exploreAirlines() {
           );
         })}
       </div>
-    </div>
+	<Header />
+   </div>
     </div>
   );
 }

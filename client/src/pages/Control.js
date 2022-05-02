@@ -3,8 +3,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import "../App.css";
 
-import Axios from "axios";
-
 const Button = styled.button`
   background-color: black;
   color: white;
@@ -16,21 +14,48 @@ const Button = styled.button`
 `;
 
 function Control() {
+  const API_URL = "http://127.0.0.1:5000";
+
   const [usersList, setUsersList] = useState([]);
   const [countries, setCountriesList] = useState([]);
   const [airlines, setAirlinesList] = useState([]);
   //gets all users from the database and sets them to the local usersList
   const getUsers = () => {
-    Axios.get("http://127.0.0.1:5000/users").then((response) => {
-      setUsersList(response.data);
-    });
+  { 
+      const requestOptions = {
+        method: "GET",
+      };
+      fetch(API_URL + "/get_users", requestOptions
+      ).then(() => {
+        setUsersList([]);
+        console.log("success");
+      });
+    };
+
   };
 
   //remove all users from the database and resets the local usersList
   const clearUsers = () => {
-    Axios.get("http://127.0.0.1:5000/clear-users").then((response) => {
-      setUsersList([]);
-    });
+    {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          email: email,
+          password: password,
+          name: name,
+          lastName: lastName,
+          VaccineStatus: VaccineStatus,
+          VaccineType: VaccineType,
+          passport: passport
+        }
+      };
+      fetch(API_URL + "/users", requestOptions
+      ).then(() => {
+        setUsersList([]);
+        console.log("success");
+      });
+    };
   };
 
   const getCountries = () => {

@@ -99,7 +99,7 @@ def create_account():
 
 @app.route("/get_users", methods=["GET"])
 def get_users():
-    return get_all_table('users')
+	return jsonify(get_all_table('users'))
 
 @app.route("/insert_country", methods=["POST"])
 def insert_country():

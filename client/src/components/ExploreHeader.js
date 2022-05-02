@@ -51,20 +51,7 @@ export default function Header() {
 
   return (
     <div className={classes.root} id='header'>
-      <AppBar className={classes.appbar} elevation={0}>
-        <Toolbar className={classes.appbarWrapper}>
-          <h1 className={classes.appbarTitle}>
-            Travel<span className={classes.colorText}>Safe.</span>
-          </h1>
-        </Toolbar>
-      </AppBar>
-
-      <Collapse
-        in={checked}
-        {...(checked ? { timeout: 1000 } : {})}
-        collapsedHeight={50}
-      >
-      </Collapse>
+      
     </div>
   );
 }

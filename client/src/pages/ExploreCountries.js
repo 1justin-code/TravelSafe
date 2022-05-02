@@ -36,6 +36,10 @@ function ExploreCountries() {
   const [usersList, setUsersList] = useState([]);
   const [countries, setCountriesList] = useState([]);
   const [airlines, setAirlines] = useState([]);
+  const [vaccineStatus, setVaccineStatus] = useState("NO");
+  const [testingStatus, setTesting] = useState("NO");
+  const [quarantineStatus, setQuarantine] = useState("NO");
+
   const classes = useStyles();
   const getCountries = () => {
     Axios.get("http://127.0.0.1/countries").then((response) => {
@@ -49,7 +53,18 @@ function ExploreCountries() {
     <div className='App'>
       <div className={classes.root}>
                 <CssBaseline />
-                <Header />
+  <label>
+    <input type="checkbox" onChange={(event) => setVaccineStatus(event.target.value)}/>
+    		Vaccine?
+  	</label>
+    <label>
+    		<input type="checkbox" onChange={(event) => setTesting(event.target.value)}/>
+    		Testing?
+  	</label>
+    <label>
+    		<input type="checkbox" onChange={(event) => setQuarantine(event.target.value)}/>
+    		Quarantine?
+  	</label>
 	<div className='information'>
 	<Button onClick={getCountries}> SEARCH COUNTRIES </Button>
         {countries.map((val, _key) => {
@@ -64,6 +79,7 @@ function ExploreCountries() {
           );
         })}
 	</div>
+  <Header />
       </div>
     </div>
   );
