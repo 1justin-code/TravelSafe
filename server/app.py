@@ -1,3 +1,4 @@
+from pkgutil import get_data
 from unicodedata import name
 from flask import Flask, send_from_directory
 from flask_cors import CORS #comment this on deployment
@@ -99,7 +100,8 @@ def create_account():
 
 @app.route("/get_users", methods=["GET"])
 def get_users():
-    return get_all_table('users')
+    list = get_all_table('users')
+    return jsonify({'result': [dict(row) for row in list]})
 
 @app.route("/insert_country", methods=["POST"])
 def insert_country():
