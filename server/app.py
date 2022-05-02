@@ -16,7 +16,7 @@ import pandas as pd
 session = sessionmaker()
 Base = declarative_base()
 
-engine = create_engine('mysql+pymysql://admin:Cs348proj135!@database-2.cbz6gnja77aw.us-east-2.rds.amazonaws.com/covidtravel_db')
+engine = create_engine('mysql://admin:Cs348proj135!@database-2.cbz6gnja77aw.us-east-2.rds.amazonaws.com/covidtravel_db')
 Session = sessionmaker(bind=engine)
 
 class users(Base):

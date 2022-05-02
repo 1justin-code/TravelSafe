@@ -32,7 +32,8 @@ function Control() {
         } else {
           alert("error");
       }}).then(data => {
-        setUsersList(data);
+        console.log(data.result)
+        setUsersList(data.result);
         console.log("success");
       });
     };
