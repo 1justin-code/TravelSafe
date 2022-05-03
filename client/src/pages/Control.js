@@ -61,7 +61,12 @@ function Control() {
 
   const getCountries = () => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
+      headers: {
+        "vaccine_status": 'none',
+        "testing_status": 'none',
+        "quarantine_status": 'none'
+      }
     };
     fetch(API_URL + "/get_all_countries", requestOptions
     ).then(resp => {
@@ -95,7 +100,11 @@ function Control() {
 
   const getAirlines = () => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
+      headers: {
+      "vaccine_status": 'none',
+      "mask": 'none'
+      }
     };
     fetch(API_URL + "/get_all_airlines", requestOptions
     ).then(resp => {
@@ -128,13 +137,55 @@ function Control() {
   };
 
   const sendAirlines = () => {
-    //document.getElementById("country1").value
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "airline_id": document.getElementById("airlines1").value,
+        "airline_name": document.getElementById("airlines2").value,
+        "mask_policy": document.getElementById("airlines3").value,
+        "vaccine_required": document.getElementById("airlines4").value,
+      }
+    };
+    fetch(API_URL + "/insert_airlines", requestOptions
+    ).then(() => {
+      console.log("success");
+    });
+
 };
 
   const sendCountries = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "country_name": document.getElementById("countries1").value,
+        "vaccines_required": document.getElementById("countries2").value,
+        "testing_required": document.getElementById("countries3").value,
+        "risk_level": document.getElementById("countries4").value,
+        "quarantine_required": document.getElementById("countries5").value,
+      }
+    };
+    fetch(API_URL + "/insert_country", requestOptions
+    ).then(() => {
+      console.log("success");
+    });
 };
 
   const sendVaccines = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "vaccine_id": document.getElementById("vaccine1").value,
+        "vaccine_name": document.getElementById("vaccine2").value,
+      }
+    };
+    console.log(requestOptions);
+    fetch(API_URL + "/insert_vaccine", requestOptions
+    ).then(() => {
+      console.log("success");
+    });
 };
 
   return (
@@ -157,7 +208,7 @@ function Control() {
           return (
             <div className='countries'>
               <h3> Country Name: {val.country_name} </h3>
-              <h3> Vaccine Required: {val.vaccine_required} </h3>
+              <h3> Vaccine Required: {val.vaccines_required} </h3>
               <h3> Testing Required: {val.testing_required} </h3>
               <h3> Risk Level: {val.risk_level} </h3>
               <h3> Quarantine Required: {val.quarantine_required} </h3>

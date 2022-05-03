@@ -36,16 +36,21 @@ function ExploreCountries() {
   const [usersList, setUsersList] = useState([]);
   const [countries, setCountriesList] = useState([]);
   const [airlines, setAirlines] = useState([]);
-  const [vaccineStatus, setVaccineStatus] = useState("NO");
-  const [testingStatus, setTesting] = useState("NO");
-  const [quarantineStatus, setQuarantine] = useState("NO");
+  const [vaccineStatus, setVaccineStatus] = useState(false);
+  const [testingStatus, setTesting] = useState(false);
+  const [quarantineStatus, setQuarantine] = useState(false);
 
   const API_URL = "http://127.0.0.1:5000";
 
   const classes = useStyles();
   const getCountries = () => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
+      headers: {
+        "vaccine_status": vaccineStatus,
+        "testing_status": testingStatus,
+        "quarantine_status": quarantineStatus
+      }
     };
     fetch(API_URL + "/get_all_countries", requestOptions
     ).then(resp => {
@@ -66,15 +71,15 @@ function ExploreCountries() {
       <div className={classes.root}>
                 <CssBaseline />
   <label>
-    <input type="checkbox" onChange={(event) => setVaccineStatus(event.target.value)}/>
+    <input type="checkbox" onChange={(event) => setVaccineStatus(!vaccineStatus)}/>
     		Vaccine?
   	</label>
     <label>
-    		<input type="checkbox" onChange={(event) => setTesting(event.target.value)}/>
+    		<input type="checkbox" onChange={(event) => setTesting(!testingStatus)}/>
     		Testing?
   	</label>
     <label>
-    		<input type="checkbox" onChange={(event) => setQuarantine(event.target.value)}/>
+    		<input type="checkbox" onChange={(event) => setQuarantine(!quarantineStatus)}/>
     		Quarantine?
   	</label>
 	<div className='information'>

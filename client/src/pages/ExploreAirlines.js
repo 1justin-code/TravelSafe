@@ -36,17 +36,22 @@ function exploreAirlines() {
   const [usersList, setUsersList] = useState([]);
   const [countries, setCountriesList] = useState([]);
   const [airlines, setAirlinesList] = useState([]);
-  const [vaccineStatus, setVaccineStatus] = useState("NO");
-  const [mask, setMask] = useState("NO");
+  const [vaccineStatus, setVaccineStatus] = useState(false);
+  const [mask, setMask] = useState(false);
 
   const API_URL = "http://127.0.0.1:5000";
 
   const getAirlines = () => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
+      headers: {
+      "vaccine_status": vaccineStatus,
+      "mask": mask,
+      }
     };
+    console.log(requestOptions)
     fetch(API_URL + "/get_all_airlines", requestOptions
-    ).then(resp => {
+  ).then(resp => {
       if (resp.status == 200) {
         return resp.json();
       } else {
@@ -65,11 +70,11 @@ function exploreAirlines() {
   <div className={classes.root}>
       		<CssBaseline />
   	<label>
-    		<input type="checkbox" onChange={(event) => setVaccineStatus(event.target.value)}/>
+    		<input type="checkbox" onChange={(event) => setVaccineStatus(!vaccine)}/>
     		Vaccine?
   	</label>
     <label>
-    		<input type="checkbox" onChange={(event) => setMask(event.target.value)}/>
+    		<input type="checkbox" onChange={(event) => setMask(!mask)}/>
     		Mask?
   	</label>
 <div className='information'>
@@ -79,7 +84,7 @@ function exploreAirlines() {
 	    <div className = 'airlines'>
 	      <h3> Airline Id: {val.airline_id} </h3>
               <h3> Airline Name: {val.airline_name} </h3>
-              <h3> Mask Required: {val.mask_required} </h3>
+              <h3> Mask Required: {val.mask_policy} </h3>
               <h3> Vaccine Required: {val.vaccine_required} </h3>
 	    </div>
           );

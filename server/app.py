@@ -1,3 +1,4 @@
+from cgi import test
 from pkgutil import get_data
 from unicodedata import name
 from flask import Flask, send_from_directory
@@ -119,6 +120,21 @@ def insert_country():
     risk_level = request.headers.get('risk_level')
     quarantine_required = request.headers.get('quarantine_required')
 
+    if testing_required == 'True':
+        testing_required = True
+    else:
+        testing_required = False
+    
+    if vaccines_required == 'True':
+        vaccines_required = True
+    else:
+        vaccines_required = False
+
+    if quarantine_required == 'True':
+        quarantine_required = True
+    else:
+        quarantine_required = False
+
     s = Session()
 
     data = {"country_name":[country_name], "vaccines_required":[vaccines_required], "testing_required":[testing_required], "risk_level":[risk_level], "quarantine_required":[quarantine_required]}
@@ -132,10 +148,29 @@ def insert_country():
 
     return 'success'
 
-@app.route("/get_all_countries", methods=["GET"])
+@app.route("/get_all_countries", methods=["POST"])
 def get_all_countries():
+    testing = request.headers.get("testing_status")
+    quarantineStatus = request.headers.get("quarantine_status")
+    vaccine = request.headers.get("vaccine_status")
     list = get_all_table('countries')
-    return jsonify({'result': [dict(row) for row in list]})
+    if vaccine == 'none' and quarantineStatus == 'none' and testing == 'none':
+        return jsonify({'result': [dict(row) for row in list]})
+    else:
+        if testing == 'false':
+            testing = 0
+        else:
+            testing = 1
+        if vaccine == 'false':
+            vaccine = 0
+        else:
+            vaccine = 1
+        if quarantineStatus == 'false':
+            quarantineStatus = 0
+        else:
+            quarantineStatus = 1
+
+        return jsonify({'result': [dict(row) for row in list if row[1] == vaccine and row[2] == testing and row[4] == quarantineStatus]})
 
 @app.route('/clear_countries', methods=["POST"])
 def clear_countries():
@@ -153,10 +188,16 @@ def insert_airlines():
     mask_policy = request.headers.get("mask_policy")
     vaccine_required = request.headers.get('vaccine_required')
 
-    airline_id = 2
-    airline_name = 'hello airlines'
-    mask_policy = False
-    vaccine_required = False
+
+    if mask_policy == 'True':
+        mask_policy = True
+    else:
+        mask_policy = False
+    
+    if vaccine_required == 'True':
+        vaccine_required = True
+    else:
+        vaccine_required = False
 
     s = Session()
 
@@ -171,10 +212,25 @@ def insert_airlines():
 
     return "success"
 
-@app.route("/get_all_airlines", methods=["GET"])
+@app.route("/get_all_airlines", methods=["POST"])
 def get_all_airlines():
+    mask = request.headers.get("mask")
+    vaccine = request.headers.get("vaccine_status")
     list = get_all_table('airlines')
-    return jsonify({'result': [dict(row) for row in list]})
+    if mask == 'none' and vaccine == 'none':
+        return jsonify({'result': [dict(row) for row in list]})
+    else:
+        if mask == 'false':
+            mask = 0
+        else:
+            mask = 1
+        if vaccine == 'false':
+            vaccine = 0
+        else:
+            vaccine = 1
+        for row in list:
+            print (row[2], mask, row[3], vaccine) 
+        return jsonify({'result': [dict(row) for row in list if row[2] == mask and row[3] == vaccine]})
 
 @app.route('/clear_airlines', methods=["POST"])
 def clear_airlines():
@@ -186,17 +242,19 @@ def clear_airlines():
 
 @app.route("/insert_vaccine", methods=["POST"])
 def insert_vaccine():
-    '''vaccine_id = request.headers.get("vaccine_id")
-    vaccine_name = request.headers.get("vaccine_name")'''
+    vaccine_id = request.headers.get("vaccine_id")
+    vaccine_name = request.headers.get("vaccine_name")
 
-    vaccine_id = 2
-    vaccine_name = 'lol'
+    vaccine_id = int(vaccine_id)
+
 
     s = Session()
 
-    data = {"vaccine_id":vaccine_id, "vaccine_name":vaccine_name}
+    data = {"vaccine_id":[vaccine_id], "vaccine_name":[vaccine_name]}
 
     df = pd.DataFrame(data)
+
+    print(df.to_dict(orient="records"))
 
     s.bulk_insert_mappings(vaccines, df.to_dict(orient="records"))
 
